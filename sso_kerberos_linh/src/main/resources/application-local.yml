@@ -1,0 +1,8 @@
+app:
+  service-principal: HTTP/web.fortest.local@ZSYS2.LOCAL
+  keytab-location: /opt/root.keytab
+#  krb5-config: /opt/tomcat/conf/krb5.conf
+
+logging.file: zsystem.log
+spring.main.allow-bean-definition-overriding: true
+security.basic.enabled: false
