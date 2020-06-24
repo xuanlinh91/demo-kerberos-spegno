@@ -8,13 +8,18 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
-public class HomeController extends BaseController {
+public class HomeController {
     @Autowired
     private Environment env;
 
-    @GetMapping("/")
-    @ResponseBody
-    public String  home(Authentication authentication) {
-        return  "Hello " + authentication.getName();
+//    @GetMapping("/")
+//    @ResponseBody
+//    public String  home(Authentication authentication) {
+//        return  "Hello " + authentication.getName();
+//    }
+
+    @GetMapping("/hello")
+    public String home() {
+        return  "hello";
     }
 }
