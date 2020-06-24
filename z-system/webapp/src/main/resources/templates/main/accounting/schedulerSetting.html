@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/accounting :: htmlHeader"></head>
+<body>
+
+<div th:replace="fragments/accounting :: sideNavbar"></div>
+
+<div class="page">
+    <div th:replace="fragments/accounting :: breadcrumbs('crumbFirst', 'crumbSecond')"></div>
+
+    <section>
+        <div class="container-fluid">
+            <header></header>
+            <div class="row">
+
+            </div>
+        </div>
+    </section>
+
+</div>
+
+<div>
+    <div th:replace="fragments/accounting :: scripts"></div>
+    <script type="text/javascript" th:src="@{/js/accounting_scheduler_setting.js}"></script>
+</div>
+
+</body>
+</html>

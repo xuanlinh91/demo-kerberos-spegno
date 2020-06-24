@@ -1,0 +1,97 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+
+<head th:fragment = "htmlHeader">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>地方税アプリケーション</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="all,follow">
+    <!-- Bootstrap CSS-->
+    <link rel="stylesheet" type="text/css" th:href="@{/vendor/bootstrap/css/bootstrap.min.css}">
+    <!-- Font Awesome CSS-->
+    <link rel="stylesheet" type="text/css" th:href="@{/vendor/font-awesome/css/font-awesome.min.css}">
+    <!-- Fontastic Custom icon font-->
+    <link rel="stylesheet" type="text/css" th:href="@{/css/fontastic.css}">
+    <!-- Google fonts - Roboto -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700">
+    <!-- Bootstrap Datepicker CSS-->
+    <link rel="stylesheet" type="text/css" th:href="@{/vendor/bootstrap-datepicker/css/bootstrap-datepicker3.css}">
+    <!-- DataTables CSS-->
+    <link rel="stylesheet" type="text/css" th:href="@{/vendor/datatables.net-bs4/css/dataTables.bootstrap4.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/vendor/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css}">
+    <!-- jQuery Circle-->
+    <link rel="stylesheet" type="text/css" th:href="@{/css/grasp_mobile_progress_circle-1.0.0.min.css}">
+    <!-- Custom Scrollbar-->
+    <link rel="stylesheet" type="text/css" th:href="@{/vendor/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.css}">
+    <!-- theme stylesheet-->
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.blue.premium.css}" id="theme-stylesheet">
+    <!-- Custom stylesheet -->
+    <link rel="stylesheet" type="text/css" th:href="@{/css/custom.css}">
+    <!-- Favicon-->
+    <link rel="shortcut icon" th:href="@{/img/favicon.ico}">
+    <!-- Tweaks for older IEs--><!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
+</head>
+
+<nav th:fragment = "sideNavbar" class="side-navbar">
+    <div class="side-navbar-wrapper">
+        <div class="menu-view-toggle text-right">
+            <a id="toggle-btn" href="#" class="menu-btn">
+                <i id="toggle-btn-icon" class="fa fa-angle-left"> </i>
+            </a>
+        </div>
+        <div class="main-menu">
+            <ul id="side-main-menu" class="side-menu list-unstyled">
+                <li><a href="#"><i class="icon-home"></i>TOP</a></li>
+                <li><a href="#dropdown-error" aria-expanded="true" data-toggle="collapse"><i class="icon-interface-windows"></i>ビル情報補正エラー</a>
+                    <ul id="dropdown-error" class="collapse list-unstyled show">
+                        <li id="menu-error-bldg-master"><a th:href="@{/local-tax/error-bldg-master}">ビルマスタ補正</a></li>
+                        <li id="menu-error-other-dispatch"><a th:href="@{/local-tax/error-other-dispatch}">その他派遣紐付け</a></li>
+                        <li id="menu-error-floor-area"><a th:href="@{/local-tax/error-floor-area}">床面積紐付け</a></li>
+                    </ul>
+                </li>
+                <li><a href="#dropdown-update" aria-expanded="true" data-toggle="collapse"><i class="icon-interface-windows"></i>ビル情報修正</a>
+                    <ul id="dropdown-update" class="collapse list-unstyled show">
+                        <li id="menu-update-bldg-master"><a th:href="@{/local-tax/update-bldg-master}">ビルマスタ(補正後)</a></li>
+                        <li id="menu-update-other-dispatch"><a th:href="@{/local-tax/update-other-dispatch}">その他派遣情報紐付けマスタ</a></li>
+                        <li id="menu-update-floor-area"><a th:href="@{/local-tax/update-floor-area}">床面積紐付けマスタ</a></li>
+                    </ul>
+                </li>
+                <li id="menu-summary-report"><a th:href="@{/local-tax/summary-report}"><i class="icon-grid"></i>総括調書事前入力</a></li>
+                <li id="menu-scheduler-setting"><a th:href="@{/local-tax/scheduler-setting}"><i class="fa fa-cog"></i>スケジューラ設定</a></li>
+                <li id="menu-master-setting"><a th:href="@{/local-tax/master-setting}"><i class="fa fa-cog"></i>マスタ設定</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div th:fragment = "breadcrumbs(firstPage, secondPage)" class="breadcrumb-holder">
+    <div class="container-fluid">
+        <ul class="breadcrumb">
+            <li class="breadcrumb-item" th:text="*{__${firstPage}__}">First Page</li>
+            <li class="breadcrumb-item" th:text="*{__${secondPage}__}">Second Page</li>
+        </ul>
+    </div>
+</div>
+
+<div th:fragment = "scripts">
+    <script type="text/javascript" th:src="@{/vendor/jquery/jquery.min.js}"></script>
+    <script type="text/javascript" th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+    <script type="text/javascript" th:src="@{/js/grasp_mobile_progress_circle-1.0.0.min.js}"></script>
+    <script type="text/javascript" th:src="@{/vendor/jquery.cookie/jquery.cookie.js}"> </script>
+    <script type="text/javascript" th:src="@{/vendor/jquery-validation/jquery.validate.min.js}"></script>
+    <script type="text/javascript" th:src="@{/vendor/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js}"></script>
+    <script type="text/javascript" th:src="@{/vendor/bootstrap-datepicker/js/bootstrap-datepicker.min.js}"></script>
+    <script type="text/javascript" th:src="@{/vendor/datatables.net/js/jquery.dataTables.js}"></script>
+    <script type="text/javascript" th:src="@{/vendor/datatables.net-bs4/js/dataTables.bootstrap4.js}"></script>
+    <script type="text/javascript" th:src="@{/vendor/datatables.net-responsive/js/dataTables.responsive.min.js}"></script>
+    <script type="text/javascript" th:src="@{/vendor/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js}"></script>
+    <script type="text/javascript" th:src="@{/js/front.js}"></script>
+</div>
+
+</body>
+</html>

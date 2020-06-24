@@ -1,0 +1,29 @@
+<html>
+<body>
+
+    <div th:fragment="head(titleText)">
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <title th:text="*{__${titleText}__}">Default Title</title>
+
+        <link rel="stylesheet" type="text/css" th:href="@{/lib/bootstrap/css/bootstrap.min.css}">
+        <link rel="stylesheet" type="text/css" th:href="@{/css/common/styles.css}">
+    </div>
+
+    <div th:fragment="page_header(screenName, user)">
+        <h4 class="common__screen_name" id="common_screen_name" th:text="*{__${screenName}__}">Default Screen Name</h4>
+        <div class="common__right">
+            <label id="common_username" th:text="*{__${user}__}">Default User Name</label>
+            <button type="button" class="btn btn--white">ログオフ</button>
+        </div>
+        <hr>
+    </div>
+
+    <footer th:fragment="foot">
+        <hr>
+        <p>Default Footer</p>
+    </footer>
+
+</body>
+</html>

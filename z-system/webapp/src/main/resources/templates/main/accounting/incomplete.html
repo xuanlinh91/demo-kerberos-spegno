@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/accounting :: htmlHeader"></head>
+<body>
+
+<div th:replace="fragments/accounting :: sideNavbar"></div>
+
+<div class="page">
+    <div th:replace="fragments/accounting :: breadcrumbs('crumbFirst', 'crumbSecond')"></div>
+
+    <section class="forms">
+        <div class="container-fluid">
+            <header></header>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="card full-height-card">
+                        <div class="card-body">
+                            <form class="form-horizontal mb-3">
+                                <div class="form-group row row-no-margin">
+                                    <label class="form-control-label mr-2">表示シート</label>
+                                    <select id="filter-sheetname" class="form-control form-control-sm col-sm-2 mr-3">
+                                        <option th:each="item : *{subReportList}" th:value="${item.id}" th:text="${item.name}"></option>
+                                    </select>
+                                    <label class="form-control-label mr-2">会計期間</label>
+                                    <select id="filter-year" class="form-control form-control-sm col-sm-2 col-sm-1-5 mr-1">
+                                        <option th:each="item : *{yearList}" th:value="${item.key}" th:text="${item.value}" th:selected="${item.key=='2020'}"></option>
+                                    </select>
+                                    <select id="filter-month" class="form-control form-control-sm col-sm-2 col-sm-1-5 mr-3">
+                                        <option th:each="i : ${#numbers.sequence(1, 12)}" th:value="${#numbers.formatInteger(i,2)}" th:text="${i} + '月'" th:selected="${i==4}"></option>
+                                    </select>
+                                    <label class="form-control-label mr-2">ファンクションキー</label>
+                                    <select id="filter-functionkey" class="form-control form-control-sm col-sm-2 mr-2">
+                                        <option>ファンクションキー1</option>
+                                        <option>ファンクションキー2</option>
+                                        <option>ファンクションキー3</option>
+                                        <option>ファンクションキー4</option>
+                                        <option>ファンクションキー5</option>
+                                    </select>
+                                    <button id="btn-filter" type="button" class="btn btn-sm btn-primary"><i class="fa fa-search"></i></button>
+                                    <div class="command-buttons">
+                                        <button id="btn-decision" type="button" class="btn btn-sm btn-warning btn-fixed-size">確定</button>
+                                    </div>
+                                </div>
+                            </form>
+<!--                            <form class="form-horizontal filter-content collapse" id="collapse-filter">-->
+<!--                                <div class="form-group row">-->
+<!--                                    <label class="col-sm-2 col-sm-1-5 form-control-label">表示シート</label>-->
+<!--                                    <select id="filter-sheetname" class="form-control form-control-sm col-sm-2 mr-3">-->
+<!--                                        <option th:each="item : *{subReportList}" th:value="${item.id}" th:text="${item.name}"></option>-->
+<!--                                    </select>-->
+<!--                                    <label class="col-sm-2 col-sm-1-5 form-control-label">会計期間</label>-->
+<!--                                    <select id="filter-year" class="form-control form-control-sm col-sm-2 col-sm-1-5 mr-2">-->
+<!--                                        <option th:each="item : *{yearList}" th:value="${item.key}" th:text="${item.value}" th:selected="${item.key=='2020'}"></option>-->
+<!--                                    </select>-->
+<!--                                    <select id="filter-month" class="form-control form-control-sm col-sm-2 col-sm-1-5">-->
+<!--                                        <option th:each="i : ${#numbers.sequence(1, 12)}" th:value="${#numbers.formatInteger(i,2)}" th:text="${i} + '月'" th:selected="${i==4}"></option>-->
+<!--                                    </select>-->
+<!--                                    <label class="col-sm-2 form-control-label">ファンクションキー</label>-->
+<!--                                    <select id="filter-functionkey" class="form-control form-control-sm col-sm-2 mr-3">-->
+<!--                                        <option>ファンクションキー1</option>-->
+<!--                                        <option>ファンクションキー2</option>-->
+<!--                                        <option>ファンクションキー3</option>-->
+<!--                                        <option>ファンクションキー4</option>-->
+<!--                                        <option>ファンクションキー5</option>-->
+<!--                                    </select>-->
+<!--                                    <button id="btn-filter" type="button" class="btn btn-sm btn-primary"><i class="fa fa-search"></i></button>-->
+<!--                                </div>-->
+<!--                            </form>-->
+                            <div class="line"></div>
+                            <div class="table-responsive">
+                                <!-- 定額取引（自社請求側） -->
+                                <table th:id="'datatable' + ${subReportList[0].id}" class="table table-sm table-striped table-hover nowrap editable-datatable hidden-datatable">
+                                    <thead>
+                                    <tr>
+                                        <th class="no-sort no-search">No.</th>
+                                        <th class="no-sort no-search"><input type="checkbox" th:id="'datatable' + ${subReportList[0].id} + '_check-all'" class="mr-1">催促除外</th>
+                                        <th class="no-sort no-search">問合せNo.</th>
+                                        <th class="no-sort no-search">問合せステータス</th>
+                                        <th class="no-sort no-search">判定(問合せBox)</th>
+                                        <th class="no-sort no-search">処理状況(問合せBox)</th>
+                                        <th class="no-sort no-search">判定</th>
+                                        <th class="no-sort no-search">処理状況</th>
+                                        <th class="no-sort no-search">自由記入欄</th>
+                                        <th class="no-sort no-search">更新者</th>
+                                        <th class="no-sort no-search">期末計上結果判定</th>
+                                        <th>ステータス</th>
+                                        <th>自会社名※請求側</th>
+                                        <th>相手会社名</th>
+                                        <th>契約登録番号</th>
+                                        <th>契約件名</th>
+                                        <th>請求側組織コード</th>
+                                        <th>請求側組織名</th>
+                                        <th>請求側部課コード</th>
+                                        <th>請求側部課名</th>
+                                        <th>支払側組織コード</th>
+                                        <th>支払側組織名</th>
+                                        <th>支払側部課コード</th>
+                                        <th>支払側部課名</th>
+                                        <th>接続日</th>
+                                        <th>初回請求金額</th>
+                                        <th>例月請求金額</th>
+                                        <th>終回請求金額</th>
+                                        <th>請求側初回検収接続状態</th>
+                                        <th>支払側初回検収接続状態</th>
+                                        <th>相手担当者</th>
+                                        <th>相手担当者電話番号</th>
+                                        <th>相手担当者メールアドレス</th>
+                                        <th>自社担当者</th>
+                                        <th>自社担当者電話番号</th>
+                                        <th>自社担当者メールアドレス</th>
+                                        <th>接続日からの経過日数</th>
+                                        <th class="no-sort no-search">エリア</th>
+                                        <th class="no-sort no-search">処理案内</th>
+                                    </tr>
+                                    </thead>
+                                </table>
+
+                                <!-- 定額取引（自社支払側） -->
+                                <table th:id="'datatable' + ${subReportList[1].id}" class="table table-sm table-striped table-hover nowrap editable-datatable hidden-datatable">
+                                    <thead>
+                                    <tr>
+                                        <th class="no-sort no-search">No.</th>
+                                        <th class="no-sort no-search"><input type="checkbox" th:id="'datatable' + ${subReportList[1].id} + '_check-all'" class="mr-1">催促除外</th>
+                                        <th class="no-sort no-search">問合せNo.</th>
+                                        <th class="no-sort no-search">問合せステータス</th>
+                                        <th class="no-sort no-search">判定(問合せBox)</th>
+                                        <th class="no-sort no-search">処理状況(問合せBox)</th>
+                                        <th class="no-sort no-search">判定</th>
+                                        <th class="no-sort no-search">処理状況</th>
+                                        <th class="no-sort no-search">自由記入欄</th>
+                                        <th class="no-sort no-search">更新者</th>
+                                        <th class="no-sort no-search">期末計上結果判定</th>
+                                        <th>ステータス</th>
+                                        <th>自会社名※支払側</th>
+                                        <th>相手会社名</th>
+                                        <th>契約登録番号</th>
+                                        <th>契約件名</th>
+                                        <th>請求側組織コード</th>
+                                        <th>請求側組織名</th>
+                                        <th>請求側部課コード</th>
+                                        <th>請求側部課名</th>
+                                        <th>支払側組織コード</th>
+                                        <th>支払側組織名</th>
+                                        <th>支払側部課コード</th>
+                                        <th>支払側部課名</th>
+                                        <th>接続日</th>
+                                        <th>初回請求金額</th>
+                                        <th>例月請求金額</th>
+                                        <th>終回請求金額</th>
+                                        <th>請求側初回検収接続状態</th>
+                                        <th>支払側初回検収接続状態</th>
+                                        <th>相手担当者</th>
+                                        <th>相手担当者電話番号</th>
+                                        <th>相手担当者メールアドレス</th>
+                                        <th>自社担当者</th>
+                                        <th>自社担当者電話番号</th>
+                                        <th>自社担当者メールアドレス</th>
+                                        <th>接続日からの経過日数</th>
+                                        <th class="no-sort no-search">エリア</th>
+                                        <th class="no-sort no-search">処理案内</th>
+                                    </tr>
+                                    </thead>
+                                </table>
+
+                                <!-- 個別取引（自社請求側） -->
+                                <table th:id="'datatable' + ${subReportList[2].id}" class="table table-sm table-striped table-hover nowrap editable-datatable hidden-datatable">
+                                    <thead>
+                                    <tr>
+                                        <th class="no-sort no-search">No.</th>
+                                        <th class="no-sort no-search"><input type="checkbox" th:id="'datatable' + ${subReportList[2].id} + '_check-all'" class="mr-1">催促除外</th>
+                                        <th class="no-sort no-search">問合せNo.</th>
+                                        <th class="no-sort no-search">問合せステータス</th>
+                                        <th class="no-sort no-search">判定(問合せBox)</th>
+                                        <th class="no-sort no-search">処理状況(問合せBox)</th>
+                                        <th class="no-sort no-search">判定</th>
+                                        <th class="no-sort no-search">処理状況</th>
+                                        <th class="no-sort no-search">自由記入欄</th>
+                                        <th class="no-sort no-search">更新者</th>
+                                        <th class="no-sort no-search">期末計上結果判定</th>
+                                        <th>ステータス</th>
+                                        <th>突合候補</th>
+                                        <th>自会社名※請求側</th>
+                                        <th>相手会社名</th>
+                                        <th>契約登録番号</th>
+                                        <th>契約件名</th>
+                                        <th>請求側組織コード</th>
+                                        <th>請求側組織名</th>
+                                        <th>請求側部課コード</th>
+                                        <th>請求側部課名</th>
+                                        <th>支払側組織コード</th>
+                                        <th>支払側組織名</th>
+                                        <th>支払側部課コード</th>
+                                        <th>支払側部課名</th>
+                                        <th>取引種別</th>
+                                        <th>概算識別</th>
+                                        <th>接続日</th>
+                                        <th>役務提供開始日</th>
+                                        <th>役務提供終了日</th>
+                                        <th>取引日</th>
+                                        <th>請求番号</th>
+                                        <th>支払番号</th>
+                                        <th>金額</th>
+                                        <th>相手担当者</th>
+                                        <th>相手担当者電話番号</th>
+                                        <th>相手担当者メールアドレス</th>
+                                        <th>自社担当者</th>
+                                        <th>自社担当者電話番号</th>
+                                        <th>自社担当者メールアドレス</th>
+                                        <th>接続日からの経過日数</th>
+                                        <th class="no-sort no-search">エリア</th>
+                                        <th class="no-sort no-search">処理案内</th>
+                                    </tr>
+                                    </thead>
+                                </table>
+
+                                <!-- 個別取引（自社支払側） -->
+                                <table th:id="'datatable' + ${subReportList[3].id}" class="table table-sm table-striped table-hover nowrap editable-datatable hidden-datatable">
+                                    <thead>
+                                    <tr>
+                                        <th class="no-sort no-search">No.</th>
+                                        <th class="no-sort no-search"><input type="checkbox" th:id="'datatable' + ${subReportList[3].id} + '_check-all'" class="mr-1">催促除外</th>
+                                        <th class="no-sort no-search">問合せNo.</th>
+                                        <th class="no-sort no-search">問合せステータス</th>
+                                        <th class="no-sort no-search">判定(問合せBox)</th>
+                                        <th class="no-sort no-search">処理状況(問合せBox)</th>
+                                        <th class="no-sort no-search">判定</th>
+                                        <th class="no-sort no-search">処理状況</th>
+                                        <th class="no-sort no-search">自由記入欄</th>
+                                        <th class="no-sort no-search">更新者</th>
+                                        <th class="no-sort no-search">請求側非参画で金額なし</th>
+                                        <th class="no-sort no-search">期末計上結果判定</th>
+                                        <th>ステータス</th>
+                                        <th>突合候補</th>
+                                        <th>自会社名※支払側</th>
+                                        <th>相手会社名</th>
+                                        <th>契約登録番号</th>
+                                        <th>契約件名</th>
+                                        <th>請求側組織コード</th>
+                                        <th>請求側組織名</th>
+                                        <th>請求側部課コード</th>
+                                        <th>請求側部課名</th>
+                                        <th>支払側組織コード</th>
+                                        <th>支払側組織名</th>
+                                        <th>支払側部課コード</th>
+                                        <th>支払側部課名</th>
+                                        <th>取引種別</th>
+                                        <th>概算識別</th>
+                                        <th>接続日</th>
+                                        <th>役務提供開始日</th>
+                                        <th>役務提供終了日</th>
+                                        <th>取引日</th>
+                                        <th>請求番号</th>
+                                        <th>支払番号</th>
+                                        <th>金額</th>
+                                        <th>相手担当者</th>
+                                        <th>相手担当者電話番号</th>
+                                        <th>相手担当者メールアドレス</th>
+                                        <th>自社担当者</th>
+                                        <th>自社担当者電話番号</th>
+                                        <th>自社担当者メールアドレス</th>
+                                        <th>接続日からの経過日数</th>
+                                        <th class="no-sort no-search">エリア</th>
+                                        <th class="no-sort no-search">処理案内</th>
+                                    </tr>
+                                    </thead>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+</div>
+
+<div>
+    <div th:replace="fragments/accounting :: scripts"></div>
+    <script type="text/javascript" th:src="@{/js/accounting_incomplete.js}"></script>
+</div>
+
+</body>
+</html>

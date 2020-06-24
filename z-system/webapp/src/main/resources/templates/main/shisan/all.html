@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+     th:replace="main/index :: main-fragment(
+           ~{:: title},
+           ~{:: #home-static-resources},
+           ~{:: #home-header},
+           ~{:: #home-nav},
+           ~{:: #home-main},
+      )">
+
+<head>
+    <title>資産管理アプリケーション</title>
+</head>
+
+<body>
+
+    <div id="home-header" th:replace="fragments/shisan :: header"></div>
+
+    <div id="home-nav" th:replace="fragments/shisan :: nav-default"></div>
+
+    <div id="home-main">
+        <div class="main_header"></div>
+
+        <div class="main_content">
+            <table class="table table-bordered table-striped">
+                <col>
+                <col>
+                <colgroup span="3">
+                <col>
+                <thead>
+                    <tr>
+                        <td rowspan="2"></td>
+                        <th rowspan="2" scope="col">送付済み</th>
+                        <th colspan="3" scope="colgroup">未完了</th>
+                        <th rowspan="2" scope="col">完了済み</th>
+                    </tr>
+                    <tr>
+                        <th scope="col">楽棚（記入なし）</th>
+                        <th scope="col">楽棚（記入なし）</th>
+                        <th scope="col">楽棚（記入なし）</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>NTT西日本</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td>BA</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td>FT</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td>NM</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td>BS</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td>MA</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="main_bottom_buttons">
+            <button class="main_bottom_button btn btn--gray">問合せBox</button>
+            <button class="main_bottom_button btn btn--gray">出力・編集</button>
+            <button class="main_bottom_button btn btn--red">ロジック開始</button>
+        </div>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.w3.org/1999/xhtml">
+    <head>
+        <div th:replace="fragments/common :: head('pageName')"></div>
+        <link rel="stylesheet" type="text/css" th:href="@{/css/admin/styles.css}">
+    </head>
+<body>
+
+    <div th:replace="fragments/common :: page_header('pageName', 'username')"></div>
+
+    <div class="content">
+        <div class="content__list_item">
+            <button class="content__list_button btn btn--orange" type="submit">マスター管理</button>
+        </div>
+        <div class="content__list_item">
+            <button class="content__list_button btn btn--orange" type="submit">ログの検索</button>
+        </div>
+        <div class="content__list_item">
+            <button class="content__list_button btn btn--orange" type="submit">RPAスケジュール</button>
+        </div>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/accounting :: htmlHeader"></head>
+<body>
+
+<div th:replace="fragments/accounting :: sideNavbar"></div>
+
+<div class="page">
+    <div th:replace="fragments/accounting :: breadcrumbs('crumbFirst', 'crumbSecond')"></div>
+
+    <section>
+        <div class="container-fluid">
+            <header></header>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <form class="form-horizontal mb-n3">
+                                <div class="form-group row row-no-right-margin">
+                                    <label class="col-sm-2 col-sm-1-5 form-control-label">会計期間</label>
+                                    <select id="filter-year" class="form-control form-control-sm col-sm-2 col-sm-1-5 mr-2">
+                                        <option th:each="item : *{yearList}" th:value="${item.key}" th:text="${item.value}" th:selected="${item.key=='2020'}"></option>
+                                    </select>
+                                    <select id="filter-month" class="form-control form-control-sm col-sm-2 col-sm-1-5 mr-3">
+                                        <option th:each="i : ${#numbers.sequence(1, 12)}" th:value="${i}" th:text="${i} + '月'" th:selected="${i==7}"></option>
+                                    </select>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-6">
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <h6>G間取引</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table id="gkan" class="table table-sm table-striped table-hover nowrap">
+                                    <thead>
+                                    <tr>
+                                        <th>会社名</th>
+                                        <th>送信数</th>
+                                        <th>未完了</th>
+                                        <th>完了</th>
+                                    </tr>
+                                    </thead>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <h6>G間取引以外</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table id="non-gkan" class="table table-sm table-striped table-hover nowrap">
+                                    <thead>
+                                    <tr>
+                                        <th>会社名</th>
+                                        <th>送信数</th>
+                                        <th>未完了</th>
+                                        <th>完了</th>
+                                    </tr>
+                                    </thead>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h6>最新取込みデータ一覧</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table id="summary" class="table table-sm table-striped table-hover nowrap">
+                                    <thead>
+                                    <tr>
+                                        <th>帳票名</th>
+                                        <th>対象組織</th>
+                                        <th>ファイル更新日時</th>
+                                        <th>システム取込み日時</th>
+                                    </tr>
+                                    </thead>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+</div>
+
+<div>
+    <div th:replace="fragments/accounting :: scripts"></div>
+    <script type="text/javascript" th:src="@{/js/accounting_dashboard.js}"></script>
+</div>
+
+</body>
+</html>

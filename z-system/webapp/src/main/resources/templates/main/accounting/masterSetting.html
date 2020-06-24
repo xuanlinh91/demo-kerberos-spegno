@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/accounting :: htmlHeader"></head>
+<body>
+
+<div th:replace="fragments/accounting :: sideNavbar"></div>
+
+<div class="page">
+    <div th:replace="fragments/accounting :: breadcrumbs('crumbFirst', 'crumbSecond')"></div>
+
+    <section class="forms">
+        <div class="container-fluid">
+            <header></header>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="card full-height-card">
+                        <div class="card-body">
+                            <form class="form-horizontal">
+                                <div class="form-group row">
+                                    <label class="col-sm-1 form-control-label">マスタ</label>
+                                    <div class="col-sm-4 mb-3">
+                                        <select name="account" class="form-control form-control-sm">
+                                            <option>マスタ１</option>
+                                            <option>マスタ２</option>
+                                            <option>マスタ３</option>
+                                        </select>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary btn-fixed-size">選択</button>
+                                </div>
+                            </form>
+                            <div class="line"></div>
+                            <div class="table-responsive">
+                                <table id="tblMasterData" style="width: 100%;" class="table table-sm table-striped table-hover nowrap">
+                                    <thead>
+                                    <tr>
+                                        <th>カラム１</th>
+                                        <th>カラム２</th>
+                                        <th>カラム３</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</div>
+
+<div>
+    <div th:replace="fragments/accounting :: scripts"></div>
+    <script type="text/javascript" th:src="@{/js/accounting_master_setting.js}"></script>
+</div>
+
+</body>
+</html>

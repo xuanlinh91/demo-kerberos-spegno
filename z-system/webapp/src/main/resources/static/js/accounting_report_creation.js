@@ -1,0 +1,3 @@
+$(function () {
+    $('#menuReportCreation').toggleClass('active');
+});

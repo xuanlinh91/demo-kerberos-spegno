@@ -1,0 +1,29 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+
+    <div th:fragment = "header">
+        <div class="header_text">資産管理アプリケーション</div>
+        <section class="header_buttons">
+            <div class="header_button">
+                Setup<br>
+                <button type="button" class="header_button_settings btn"></button>
+            </div>
+            <div class="header_button">
+                Help<br>
+                <button type="button" class="header_button_help btn"></button>
+            </div>
+        </section>
+        <hr class="hr_shisan">
+    </div>
+
+    <div th:fragment = "nav-default">
+        <div><button class="nav_button btn btn--orange space_bottom">督促</button></div>
+        <div><button class="nav_button btn btn--white space_bottom">一斉実地棚卸</button></div>
+        <div><button class="nav_button btn btn--white space_bottom">期末日実地棚卸<br>（物管）</button></div>
+        <div><button class="nav_button btn btn--white space_bottom">期末日実地棚卸<br>（部課）</button></div>
+        <div><button class="nav_button btn btn--white">期末日実地棚卸<br>（ミッション）</button></div>
+    </div>
+
+</body>
+</html>

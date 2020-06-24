@@ -1,0 +1,3 @@
+$(function () {
+    $('#menuSchedulerSetting').toggleClass('active');
+});

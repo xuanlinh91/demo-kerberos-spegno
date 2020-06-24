@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <div th:replace="fragments/common :: head('pageName')"></div>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/admin/styles.css}">
+</head>
+<body>
+
+    <div th:replace="fragments/common :: page_header('pageName', 'username')"></div>
+
+    <div class="content">
+        <div class="content__criteria">
+            <form>
+                <div class="row form-group">
+                    <label class="col-sm-2 col-form-label" for="input">取込フォルダパス</label>
+                    <div class="col-sm-5">
+                        <input class="form-control" type="text" id="input" readonly>
+                    </div>
+                    <button class="btn btn--white" type="submit">パス選択</button>
+                </div>
+
+                <div class="row form-group">
+                    <label class="col-sm-2 col-form-label" for="output">取込済フォルダパス</label>
+                    <div class="col-sm-5">
+                        <input class="form-control" type="text" id="output" readonly>
+                    </div>
+                    <button class="btn btn--white" type="submit">パス選択</button>
+                </div>
+
+                <div class="row form-group">
+                    <label class="col-sm-2 col-form-label" for="shared">共有フォルダパス</label>
+                    <div class="col-sm-5">
+                        <input class="form-control" type="text" id="shared" readonly>
+                    </div>
+                    <button class="btn btn--white" type="submit">パス選択</button>
+                </div>
+
+                <div class="row form-group">
+                    <label class="col-sm-2 col-form-label" for="rpa">RPAフォルダパス</label>
+                    <div class="col-sm-5">
+                        <input class="form-control" type="text" id="rpa" readonly>
+                    </div>
+                    <button class="btn btn--white" type="submit">パス選択</button>
+                </div>
+            </form>
+        </div>
+
+        <div>
+            <button class="btn btn--orange" type="submit">OK</button>
+            <button class="btn btn--white">キャンセル</button>
+        </div>
+    </div>
+
+</body>
+</html>

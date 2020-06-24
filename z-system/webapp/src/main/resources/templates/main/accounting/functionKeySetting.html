@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/accounting :: htmlHeader"></head>
+<body>
+
+<div th:replace="fragments/accounting :: sideNavbar"></div>
+
+<div class="page">
+    <div th:replace="fragments/accounting :: breadcrumbs('crumbFirst', 'crumbSecond')"></div>
+
+    <section class="forms">
+        <div class="container-fluid">
+            <header></header>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="card full-height-card">
+                        <div class="card-body">
+                            <form class="form-horizontal">
+                                <div class="form-group row">
+                                    <div class="col-sm-4 mb-3">
+                                        <select name="account" class="form-control form-control-sm">
+                                            <option>ファンクションキー１</option>
+                                            <option>ファンクションキー２</option>
+                                            <option>ファンクションキー３</option>
+                                            <option>ファンクションキー４</option>
+                                            <option>ファンクションキー５</option>
+                                        </select>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary btn-fixed-size">選択</button>
+                                </div>
+                            </form>
+                            <form class="form-horizontal">
+                                <div class="line"></div>
+                                <div class="form-group row">
+                                    <label class="col-sm-3 form-control-label">表示テキスト</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" class="form-control form-control-sm">
+                                        <div class="invalid-feedback">表示テキストを入力してください。</div>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-sm-3 form-control-label">会社・組織をフィルター</label>
+                                    <div class="col-sm-3">
+                                        <label class="form-control-label">会社</label>
+                                        <select multiple="" class="form-control area-form-control">
+                                            <option>option 1</option>
+                                            <option>option 2</option>
+                                            <option>option 3</option>
+                                            <option>option 4</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <label class="form-control-label">エリア・地域</label>
+                                        <select multiple="" class="form-control area-form-control">
+                                            <option>option 1</option>
+                                            <option>option 2</option>
+                                            <option>option 3</option>
+                                            <option>option 4</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <label class="form-control-label">会計組織</label>
+                                        <select multiple="" class="form-control area-form-control">
+                                            <option>option 1</option>
+                                            <option>option 2</option>
+                                            <option>option 3</option>
+                                            <option>option 4</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="line"></div>
+                                <div class="form-group row">
+                                    <div class="col-sm-12 text-right">
+                                        <button type="submit" class="btn btn-primary btn-fixed-size">登録</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</div>
+
+<div>
+    <div th:replace="fragments/accounting :: scripts"></div>
+    <script type="text/javascript" th:src="@{/js/accounting_function_key_setting.js}"></script>
+</div>
+
+</body>
+</html>

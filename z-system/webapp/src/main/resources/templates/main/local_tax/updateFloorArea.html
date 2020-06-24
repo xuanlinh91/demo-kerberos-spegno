@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/localTax :: htmlHeader"></head>
+<body>
+
+<div th:replace="fragments/localTax :: sideNavbar"></div>
+
+<div class="page">
+    <div th:replace="fragments/localTax :: breadcrumbs('crumbFirst', 'crumbSecond')"></div>
+
+    <section class="forms">
+        <div class="container-fluid">
+            <header></header>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="card full-height-card">
+                        <div class="card-body">
+                            <form class="form-horizontal mb-3">
+                                <div class="form-group row row-no-right-margin">
+                                    <label class="col-sm-2 col-sm-1-5 form-control-label">会計期間</label>
+                                    <select id="filter-year" class="form-control form-control-sm col-sm-2 col-sm-1-5 mr-2">
+                                        <option th:each="item : *{yearList}" th:value="${item.key}" th:text="${item.value}" th:selected="${item.key=='2020'}"></option>
+                                    </select>
+                                    <select id="filter-month" class="form-control form-control-sm col-sm-2 col-sm-1-5 mr-3">
+                                        <option th:each="i : ${#numbers.sequence(1, 12)}" th:value="${i}" th:text="${i} + '月'" th:selected="${i==7}"></option>
+                                    </select>
+                                    <div class="command-buttons">
+                                        <button type="button" class="btn btn-sm btn-warning btn-fixed-size">問い合わせ</button>
+                                    </div>
+                                </div>
+                            </form>
+                            <div class="line"></div>
+                            <div class="table-responsive">
+                                <table id="tbl-floor-area" class="table table-sm table-striped table-hover nowrap editable-datatable">
+                                    <thead>
+                                    <tr>
+                                        <th>ビル名称(その他派遣)</th>
+                                        <th>ビル住所(その他派遣)</th>
+                                        <th>ビルコード(原本)</th>
+                                        <th>ビル名称(原本)</th>
+                                        <th>ビル住所(原本)</th>
+                                        <th>ビルコード(補正後)</th>
+                                        <th>ビル名称(補正後)</th>
+                                        <th>ビル住所(補正後)</th>
+                                    </tr>
+                                    </thead>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+</div>
+
+<div>
+    <div th:replace="fragments/localTax :: scripts"></div>
+    <script type="text/javascript" th:src="@{/js/local_tax_update_floor_area.js}"></script>
+</div>
+
+</body>
+</html>

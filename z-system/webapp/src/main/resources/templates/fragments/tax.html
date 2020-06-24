@@ -1,0 +1,101 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+
+<head th:fragment = "htmlHeader">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>会計アプリケーション</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="all,follow">
+    <!-- Bootstrap CSS-->
+    <link rel="stylesheet" type="text/css" th:href="@{/vendor/bootstrap/css/bootstrap.min.css}">
+    <!-- Font Awesome CSS-->
+    <link rel="stylesheet" type="text/css" th:href="@{/vendor/font-awesome/css/font-awesome.min.css}">
+    <!-- Fontastic Custom icon font-->
+    <link rel="stylesheet" type="text/css" th:href="@{/css/fontastic.css}">
+    <!-- Google fonts - Roboto -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700">
+    <!-- DataTables CSS-->
+    <link rel="stylesheet" type="text/css" th:href="@{/vendor/datatables.net-bs4/css/dataTables.bootstrap4.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/vendor/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css}">
+    <!-- jQuery Circle-->
+    <link rel="stylesheet" type="text/css" th:href="@{/css/grasp_mobile_progress_circle-1.0.0.min.css}">
+    <!-- Custom Scrollbar-->
+    <link rel="stylesheet" type="text/css" th:href="@{/vendor/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.css}">
+    <!-- theme stylesheet-->
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.blue.premium.css}" id="theme-stylesheet">
+    <!-- Custom stylesheet -->
+    <link rel="stylesheet" type="text/css" th:href="@{/css/custom.css}">
+    <!-- Favicon-->
+    <link rel="shortcut icon" th:href="@{/img/favicon.ico}">
+    <!-- Tweaks for older IEs--><!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
+
+    
+    <link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/dataTables.jqueryui.min.css">
+      <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/scroller/2.0.2/css/scroller.jqueryui.min.css">
+ 	
+	<script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+	<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+	<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.21/js/dataTables.jqueryui.min.js"></script>
+	<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/scroller/2.0.2/js/dataTables.scroller.min.js"></script>
+	
+</head>
+
+<nav th:fragment = "sideNavbar" class="side-navbar">
+    <div class="side-navbar-wrapper">
+        <div class="menu-view-toggle">
+            <a id="toggle-btn" href="#" class="menu-btn">
+                <i class="icon-bars"> </i>
+            </a>
+        </div>
+        <div class="main-menu">
+            <ul id="side-main-menu" class="side-menu list-unstyled">
+                <li><a href="#"><i class="icon-home"></i>TOP</a></li>
+                <li><a href="#formsDropdown" aria-expanded="true" data-toggle="collapse"><i class="icon-interface-windows"></i>各種決算チェック</a>
+                    <ul id="formsDropdown" class="collapse list-unstyled show">
+                        <li id="menuDashboard"><a th:href="@{/accounting/dashboard}">ダッシュボード</a></li>
+                        <li id="menuIncomplete"><a th:href="@{/accounting/incomplete}">G間未完了</a></li>
+                        <li id="menuUnaccepted"><a th:href="@{/accounting/unaccepted}">未検収・未承認</a></li>
+                        <li id="menuIncompleteConfirmation"><a th:href="@{/accounting/incomplete-confirmation}">G間未完了期末計上確認</a></li>
+                        <li id="menuUnacceptedConfirmation"><a th:href="@{/accounting/unaccepted-confirmation}">未検収・未承認期末計上確認</a></li>
+                        <li id="menuReportCreation"><a th:href="@{/accounting/report-creation}">報告書作成</a></li>
+                    </ul>
+                </li>
+                <li id="menuFuntionKeySetting"><a th:href="@{/accounting/function-key-setting}"><i class="fa fa-cog"></i>ファンクションキー設定</a></li>
+                <li id="menuSchedulerSetting"><a th:href="@{/accounting/scheduler-setting}"><i class="fa fa-cog"></i>スケジューラ設定</a></li>
+                <li id="menuMasterSetting"><a th:href="@{/accounting/master-setting}"><i class="fa fa-cog"></i>マスタ設定</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div th:fragment = "breadcrumbs(firstPage, secondPage)" class="breadcrumb-holder">
+    <div class="container-fluid">
+        <ul class="breadcrumb">
+            <li class="breadcrumb-item" th:text="*{__${firstPage}__}">First Page</li>
+            <li class="breadcrumb-item" th:text="*{__${secondPage}__}">Second Page</li>
+        </ul>
+    </div>
+</div>
+
+<div th:fragment = "scripts">
+    <script type="text/javascript" th:src="@{/vendor/jquery/jquery.min.js}"></script>
+    <script type="text/javascript" th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+    <script type="text/javascript" th:src="@{/js/grasp_mobile_progress_circle-1.0.0.min.js}"></script>
+    <script type="text/javascript" th:src="@{/vendor/jquery.cookie/jquery.cookie.js}"> </script>
+    <script type="text/javascript" th:src="@{/vendor/jquery-validation/jquery.validate.min.js}"></script>
+    <script type="text/javascript" th:src="@{/vendor/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js}"></script>
+    <script type="text/javascript" th:src="@{/vendor/datatables.net/js/jquery.dataTables.js}"></script>
+    <script type="text/javascript" th:src="@{/vendor/datatables.net-bs4/js/dataTables.bootstrap4.js}"></script>
+    <script type="text/javascript" th:src="@{/vendor/datatables.net-responsive/js/dataTables.responsive.min.js}"></script>
+    <script type="text/javascript" th:src="@{/vendor/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js}"></script>
+    <script type="text/javascript" th:src="@{/js/front.js}"></script>
+</div>
+
+</body>
+</html>

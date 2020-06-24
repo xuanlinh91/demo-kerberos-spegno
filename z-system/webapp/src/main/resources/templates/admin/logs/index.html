@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <div th:replace="fragments/common :: head('pageName')"></div>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/admin/styles.css}">
+</head>
+<body>
+    <div th:replace="fragments/common :: page_header('pageName', 'username')"></div>
+
+    <div class="content">
+        <div class="content__criteria">
+            <form>
+                <div class="row form-group">
+                    <label class="col-sm-2 col-form-label" for="period_from">日時</label>
+                    <div class="col-sm-2">
+                        <input class="form-control" type="date" id="period_from">
+                    </div>
+                    <label class="col-sm-1 col-form-label" for="period_to">~</label>
+                    <div class="col-sm-2">
+                        <input class="form-control" type="date" id="period_to">
+                    </div>
+                </div>
+
+                <div class="row form-group">
+                    <label class="col-sm-2 col-form-label" for="system_1">システム</label>
+                    <div class="col-sm-2">
+                        <select class="form-control" id="system_1">
+                            <option>-</option>
+                        </select>
+                    </div>
+                    <label class="col-sm-1 col-form-label" for="system_2">または</label>
+                    <div class="col-sm-2">
+                        <select class="form-control" id="system_2">
+                            <option>-</option>
+                        </select>
+                    </div>
+                    <label class="col-sm-1 col-form-label" for="system_3">または</label>
+                    <div class="col-sm-2">
+                        <select class="form-control" id="system_3">
+                            <option>-</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="row form-group">
+                    <label class="col-sm-2 col-form-label" for="industry_1">業務</label>
+                    <div class="col-sm-2">
+                        <select class="form-control" id="industry_1">
+                            <option>-</option>
+                        </select>
+                    </div>
+                    <label class="col-sm-1 col-form-label" for="industry_2">または</label>
+                    <div class="col-sm-2">
+                        <select class="form-control" id="industry_2">
+                            <option>-</option>
+                        </select>
+                    </div>
+                    <label class="col-sm-1 col-form-label" for="industry_3">または</label>
+                    <div class="col-sm-2">
+                        <select class="form-control" id="industry_3">
+                            <option>-</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="row form-group">
+                    <label class="col-sm-2 col-form-label" for="log_level_1">ログレベル</label>
+                    <div class="col-sm-2">
+                        <select class="form-control" id="log_level_1">
+                            <option>-</option>
+                        </select>
+                    </div>
+                    <label class="col-sm-1 col-form-label" for="log_level_2">~</label>
+                    <div class="col-sm-2">
+                        <select class="form-control" id="log_level_2">
+                            <option>-</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="row form-group">
+                    <label class="col-sm-2 col-form-label" for="event_name">イベントネーム</label>
+                    <div class="col-sm-5">
+                        <input class="form-control" type="text" id="event_name">
+                    </div>
+                </div>
+
+                <div class="row form-group">
+                    <label class="col-sm-2 col-form-label" for="error_code">エラーコード</label>
+                    <div class="col-sm-1">
+                        <input class="form-control" type="text" id="error_code">
+                    </div>
+                </div>
+
+                <div class="row form-group">
+                    <label class="col-sm-2 col-form-label" for="error_msg">エラーメッセージ</label>
+                    <div class="col-sm-5">
+                        <input class="form-control" type="text" id="error_msg">
+                    </div>
+                </div>
+
+                <div class="row form-group">
+                    <label class="col-sm-2 col-form-label" for="details">詳細情報</label>
+                    <div class="col-sm-5">
+                        <input class="form-control" type="text" id="details">
+                    </div>
+                </div>
+
+                <div class="content__criteria_buttons">
+                    <button class="btn btn--orange" type="submit">検索</button>
+                    <button class="btn btn--white">クリア</button>
+                    <button class="btn btn--white" type="submit">戻る</button>
+                    <button class="content__export btn btn--gray">CSV出力</button>
+                </div>
+            </form>
+        </div>
+
+        <label>検索結果</label>
+
+        <div class="content__search_results">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>カラム１</th>
+                    <th>カラム２</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td>-</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</body>
+</html>

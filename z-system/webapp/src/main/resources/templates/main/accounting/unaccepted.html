@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/accounting :: htmlHeader"></head>
+<body>
+
+<div th:replace="fragments/accounting :: sideNavbar"></div>
+
+<div class="page">
+    <div th:replace="fragments/accounting :: breadcrumbs('crumbFirst', 'crumbSecond')"></div>
+
+    <section class="forms">
+        <div class="container-fluid">
+            <header></header>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="card full-height-card">
+                        <div class="card-body">
+                            <form class="form-horizontal mb-3">
+                                <div class="form-group row row-no-margin">
+                                    <a id="openFilter" class="open-filter" data-toggle="collapse" data-target="#collapseFilter" aria-expanded="false" aria-controls="collapseFilter">
+                                        <i class="fa fa-filter"></i>
+                                        フィルタ
+                                    </a>
+                                    <div class="command-buttons">
+                                        <button type="button" class="btn btn-sm btn-danger btn-fixed-size">出力</button>
+                                        <button type="button" class="btn btn-sm btn-warning btn-fixed-size">問い合わせ</button>
+                                    </div>
+                                </div>
+                            </form>
+                            <form class="form-horizontal filter-content collapse" id="collapseFilter">
+                                <div class="form-group row">
+                                    <label class="col-sm-2 col-sm-1-5 form-control-label">会計期間</label>
+                                    <select id="filter-year" class="form-control form-control-sm col-sm-2 col-sm-1-5 mr-2">
+                                        <option th:each="item : *{yearList}" th:value="${item.key}" th:text="${item.value}" th:selected="${item.key=='2020'}"></option>
+                                    </select>
+                                    <select id="filter-month" class="form-control form-control-sm col-sm-2 col-sm-1-5">
+                                        <option th:each="i : ${#numbers.sequence(1, 12)}" th:value="${#numbers.formatInteger(i,2)}" th:text="${i} + '月'" th:selected="${i==7}"></option>
+                                    </select>
+                                    <label class="col-sm-2 form-control-label">ファンクションキー</label>
+                                    <select id="filter_functionkey" class="form-control form-control-sm col-sm-2 mr-3">
+                                        <option>ファンクションキー1</option>
+                                        <option>ファンクションキー2</option>
+                                        <option>ファンクションキー3</option>
+                                        <option>ファンクションキー4</option>
+                                        <option>ファンクションキー5</option>
+                                    </select>
+                                    <button id="btn-filter" type="button" class="btn btn-sm btn-primary"><i class="fa fa-search"></i></button>
+                                </div>
+                            </form>
+                            <div class="line"></div>
+                            <div class="table-responsive">
+                                <table id="tbl-unaccepted" class="table table-sm table-striped table-hover nowrap editable-datatable">
+                                    <thead>
+                                    <tr>
+                                        <th class="no-sort no-search"><input type="checkbox" name="select_all" value="1" id="datatable-select-all"></th>
+                                        <th class="no-sort no-search">No.</th>
+                                        <th class="no-sort no-search">催促除外</th>
+                                        <th class="no-sort no-search">問合せNo.</th>
+                                        <th class="no-sort no-search">問合せステータス</th>
+                                        <th class="no-sort no-search">判定(問合せBox)</th>
+                                        <th class="no-sort no-search">処理状況(問合せBox)</th>
+                                        <th class="no-sort no-search col-ba-judgement">判定</th>
+                                        <th class="no-sort no-search col-ba-progress-status">処理状況</th>
+                                        <th class="no-sort no-search col-ba-comment">自由記入欄</th>
+                                        <th class="no-sort no-search">更新者</th>
+                                        <th class="no-sort no-search">伝票番号</th>
+                                        <th class="no-sort no-search">期末計上結果判定</th>
+                                        <th class="no-sort no-search">会計組織名</th>
+                                        <th class="no-sort no-search">会計組織コード</th>
+                                        <th class="no-sort no-search">部課コード</th>
+                                        <th class="no-sort no-search">部課名</th>
+                                        <th class="no-sort no-search">伝票作成者</th>
+                                        <th class="no-sort no-search">所属</th>
+                                        <th class="no-sort no-search">電話番号</th>
+                                        <th class="no-sort no-search">検収年月日</th>
+                                        <th class="no-sort no-search">伝票摘要</th>
+                                        <th class="no-sort no-search">取引金額</th>
+                                        <th class="no-sort no-search">データ種別詳細名</th>
+                                        <th class="no-sort no-search">伝票種別</th>
+                                        <th class="no-sort no-search">取引先コード</th>
+                                        <th class="no-sort no-search">取引先名</th>
+                                        <th class="no-sort no-search">メールアドレス</th>
+                                        <th class="no-sort no-search">アドレスビット</th>
+                                        <th class="no-sort no-search">資料年月</th>
+                                        <th class="no-sort no-search">データ種別コード</th>
+                                        <th class="no-sort no-search">データ種別詳細コード</th>
+                                        <th class="no-sort no-search">キー</th>
+                                        <th class="no-sort no-search">部課マスタ情報</th>
+                                        <th class="no-sort no-search">未検収・未承認データ年月日</th>
+                                        <th class="no-sort no-search">契約登録番号等</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+</div>
+
+<div>
+    <div th:replace="fragments/accounting :: scripts"></div>
+    <script type="text/javascript" th:src="@{/js/accounting_unaccepted.js}"></script>
+</div>
+
+</body>
+</html>

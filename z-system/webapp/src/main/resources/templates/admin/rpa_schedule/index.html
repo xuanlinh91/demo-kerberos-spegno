@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+  <div th:replace="fragments/common :: head('pageName')"></div>
+  <link rel="stylesheet" type="text/css" th:href="@{/css/admin/styles.css}">
+</head>
+<body>
+
+  <div th:replace="fragments/common :: page_header('pageName', 'username')"></div>
+
+  <div class="content">
+    <div class="content__top_buttons">
+      <button type="button" class="top_buttons__new btn btn--orange">新規追加</button>
+      <button type="button" class="top_buttons__return btn btn--white">戻る</button>
+    </div>
+
+    <div class="content__schedule">
+      <label>RPAスケジュールの一覧</label>
+    </div>
+
+    <div class="schedule_detail">
+      <table class="schedule_detail__table table table-striped">
+        <thead>
+          <tr>
+            <th>カラム１</th>
+            <th>カラム２</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td>-</td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td>-</td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td>-</td>
+          </tr>
+          <tr>
+            <td>4</td>
+            <td>-</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="content__bottom_buttons">
+      <button type="button" class="btn btn--orange">編集</button>
+      <button type="button" class="btn btn--gray">削除</button>
+      <button type="button" class="btn btn--white">即実行</button>
+      <button type="button" class="btn btn--white">履歴表示</button>
+    </div>
+  </div>
+
+</body>
+</html>

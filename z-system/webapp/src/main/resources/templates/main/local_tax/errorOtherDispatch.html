@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/localTax :: htmlHeader"></head>
+<body>
+
+<div th:replace="fragments/localTax :: sideNavbar"></div>
+
+<div class="page">
+    <div th:replace="fragments/localTax :: breadcrumbs('crumbFirst', 'crumbSecond')"></div>
+
+    <section class="forms">
+        <div class="container-fluid">
+            <header></header>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="card full-height-card">
+                        <div class="card-body">
+                            <form class="form-horizontal mb-3">
+                                <div class="form-group row row-no-right-margin">
+                                    <label class="col-sm-2 col-sm-1-5 form-control-label">会計期間</label>
+                                    <select id="filter-year" class="form-control form-control-sm col-sm-2 col-sm-1-5 mr-2">
+                                    </select>
+                                    <select id="filter-month" class="form-control form-control-sm col-sm-2 col-sm-1-5 mr-3">
+                                    </select>
+                                    <div class="command-buttons">
+                                    	<button type="button" id="btnReflection" class="btn btn-sm btn-secondary btn-fixed-size">反映</button>
+                                    </div>
+                                </div>
+                            </form>
+                            <div class="line"></div>
+                            <div class="table-responsive">
+                                <table id="tbl-other-dispatch" class="table table-sm table-striped table-hover nowrap editable-datatable">
+                                    <thead>
+                                    <tr>
+                                        <th>ステータス</th>
+                                        <th>エラー内容</th>
+                                        <th>ビル名称(その他派遣)</th>
+                                        <th>ビル住所(その他派遣)</th>
+                                        <th>選択(原本)</th>
+                                        <th>ビルコード(原本)</th>
+	                                    <th>ビル名称(原本)</th>
+	                                    <th>ビル住所(原本)</th>
+                                        <th>選択(補正後)</th>
+                                        <th>ビルコード(補正後)</th>
+	                                    <th>ビル名称(補正後)</th>
+	                                    <th>ビル住所(補正後)</th>
+                                        <th>対応</th>
+                                        <th>選択済(原本)</th>
+                                        <th>選択済(補正後)</th>
+                                    </tr>
+                                    </thead>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="modal fade" id="selectionBldgOrgModal" tabindex="-1" role="dialog" aria-labelledby="selectionBldgOrgModal" aria-hidden="true">
+            <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <form class="form-horizontal">
+                            <div class="form-group row row-no-right-margin">
+                                <label class="col col-sm-14-percent form-control-label">ビルコード</label>
+                                <input id="sBldgCd" type="text" class="form-control form-control-sm col col-sm-19-3-percent">
+                                <label class="col col-sm-14-percent form-control-label">ビル名称</label>
+                                <input id="sBldgName" type="text" class="form-control form-control-sm col col-sm-19-3-percent">
+                                <label class="col col-sm-14-percent form-control-label">ビル住所</label>
+                                <input id="sBldgAdd" type="text" class="form-control form-control-sm col col-sm-19-3-percent">
+                                <input type="hidden" name="hBldgMatchAddress" id="hBldgMatchAddress" value=""/>
+                                <input type="button" name="btnBldgSearch" id="btnBldgSearch" class="btn btn-sm btn-secondary btn-fixed-size" value="検索"/>
+                            </div>
+                        </form>
+                        <div class="line"></div>
+                        <div class="table-responsive">
+                            <table id="tbl-bdlg-modal" class="table table-sm table-striped table-hover nowrap editable-datatable">
+                                <thead>
+                                <tr>
+                                    <th>ビルコード(原本)</th>
+                                    <th>ビル名称(原本)</th>
+                                    <th>ビル住所(原本)</th>
+                                    <th>選択</th>
+                                </tr>
+                                </thead>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-sm btn-secondary btn-fixed-size" data-dismiss="modal">戻る</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="selectionBldgOrgAfterCorrModal" tabindex="-1" role="dialog" aria-labelledby="selectionBldgAfterCorrModal" aria-hidden="true">
+            <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <form class="form-horizontal">
+                            <div class="form-group row row-no-right-margin">
+                                <label class="col col-sm-14-percent form-control-label">ビルコード</label>
+                                <input id="sAfterCorrBldgCd" type="text" class="form-control form-control-sm col col-sm-19-3-percent">
+                                <label class="col col-sm-14-percent form-control-label">ビル名称</label>
+                                <input id="sAfterCorrBldgName" type="text" class="form-control form-control-sm col col-sm-19-3-percent">
+                                <label class="col col-sm-14-percent form-control-label">ビル住所</label>
+                                <input id="sAfterCorrBldgAdd" type="text" class="form-control form-control-sm col col-sm-19-3-percent">
+                                <input type="button" name="btnAfterCorrSearch" id="btnAfterCorrSearch" class="btn btn-sm btn-secondary btn-fixed-size" value="検索"/>
+                            </div>
+                        </form>
+                        <div class="line"></div>
+                        <div class="table-responsive">
+                            <table id="tbl-bdlg-after-corr-modal" class="table table-sm table-striped table-hover nowrap editable-datatable">
+                                <thead>
+                                <tr>
+                                    <th>ビルコード(補正後)</th>
+                                    <th>ビル名称(補正後)</th>
+                                    <th>ビル住所(補正後)</th>
+                                    <th>選択</th>
+                                </tr>
+                                </thead>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-sm btn-secondary btn-fixed-size" data-dismiss="modal">戻る</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<div>
+    <div th:replace="fragments/localTax :: scripts"></div>
+    <script type="text/javascript" th:src="@{/js/local_tax_error_other_dispatch.js}"></script>
+</div>
+
+</body>
+</html>
